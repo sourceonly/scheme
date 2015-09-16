@@ -1,0 +1,15 @@
+#!/usr/bin/guile -s \
+!#
+
+(use-modules (ice-9 popen)) 
+(use-modules (ice-9 rdelim))
+(use-modules (ice-9 regexp)) 
+
+(define (get-line port)
+  (if (eof-object? port)
+      (+ 1 1)
+      (read-line port)))
+
+(define (run-command string &optional op )
+  (let ((port (open-input-pipe string)))
+    (op (read-line port))))
